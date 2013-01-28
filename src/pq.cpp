@@ -1,24 +1,3 @@
-/* pq.c ---- Brittle April 2012 */
-/* pq_polar.c ---- Thomas June 2012 */
-/* pq_all.c ---- Thomas Oct 2012 
- * Modified for pq_server and client
- * Original data files need to be modified
- */
-/* pq.cpp ---- Thomas Jan 2013
- * Port to C++
- * CPU only
- * Range analysis by affine arithmetic using yalaa library
- * Need modified data file
- * MAX_NUM_POINTS 1409232
- */
-
-/* Proximity Queries for medical robotic application.
- * Input:  p[] : set of points in 3D space to be queried
- *         C[], M[], R[] : sequence of circular contours forming the segments
- * Output: d[] : shortest distance of every points to all segment boundaries
- *               distance is set to zero if point is inside the segment
- */
-
 #include <cstdio>
 #include <iostream>
 #include <string>
