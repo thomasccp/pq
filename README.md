@@ -1,9 +1,4 @@
 /**** Proximity Queries for medical robotic application ****/
-	Input:  
-		p[] : set of points in 3D space to be queried
-        C[], M[], R[] : sequence of circular contours forming the segments
-	Output: 
-		d[] : shortest distance of every points to all segment boundaries distance is set to zero if point is inside the segment
 ================================================================
 
 Brittle April 2012
