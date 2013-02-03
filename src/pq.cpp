@@ -77,5 +77,10 @@ int main(const int argc, const char *argv[])
 	// Write results to files
 	data.data_out(mode, no_link, no_pt, seg_idx, min_dist, out_pt, out_pt_idx, link_pt_idx, dev, pt_contour_dev, pt_contour_idx);
 
+	free(pt);
+	free(min_dist);
+	free(out_pt);
+	free(out_pt_idx);
+
 	return 0;
 }
