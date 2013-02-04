@@ -16,7 +16,7 @@ class pq_core
 		double3 		d1, d2;
 		double3 		n;
 		double3 		rhol1, rhol2;
-		double			rhol_1, rhol_2;
+		double			rhol_a, rhol_b;
 		double			theta;
 		double			u;
 		double3 		v32, w;

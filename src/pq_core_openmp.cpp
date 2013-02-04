@@ -35,7 +35,7 @@ void pq_core::pt_dist(
 		double3 		d1, d2;
 		double3 		n;
 		double3 		rhol1, rhol2;
-		double			rhol_1, rhol_2;
+		double			rhol_a, rhol_b;
 		double			theta;
 		double			u;
 		double3 		v32, w;
@@ -70,18 +70,18 @@ void pq_core::pt_dist(
 		// Step 3: v2 = C[j]+t[j].normal_roh1; v3 = C[j+1]+t[j+1].normal_roh2
 		// Find theta
 		if (max_m[j] == 1){
-			rhol_1 = rhol1.y;
-			rhol_2 = rhol1.z;
+			rhol_a = rhol1.y;
+			rhol_b = rhol1.z;
 		}
 		else if (max_m[j] == 2){
-			rhol_1 = rhol1.x;
-			rhol_2 = rhol1.z;
+			rhol_a = rhol1.x;
+			rhol_b = rhol1.z;
 		}
 		else{
-			rhol_1 = rhol1.x;
-			rhol_2 = rhol1.y;
+			rhol_a = rhol1.x;
+			rhol_b = rhol1.y;
 		}
-		theta = atan2(rhol_2, rhol_1);
+		theta = atan2(rhol_b, rhol_a);
 
 		// Linear search
 		idx_1 = 0;
@@ -114,18 +114,18 @@ void pq_core::pt_dist(
 		v2.z = s_C[j].z + t * rhol1.z;
 
 		if (max_m[j+1] == 1){
-			rhol_1 = rhol2.y;
-			rhol_2 = rhol2.z;
+			rhol_a = rhol2.y;
+			rhol_b = rhol2.z;
 		}
 		else if (max_m[j+1] == 2){
-			rhol_1 = rhol2.x;
-			rhol_2 = rhol2.z;
+			rhol_a = rhol2.x;
+			rhol_b = rhol2.z;
 		}
 		else{
-			rhol_1 = rhol2.x;
-			rhol_2 = rhol2.y;
+			rhol_a = rhol2.x;
+			rhol_b = rhol2.y;
 		}
-		theta = atan2(rhol_2, rhol_1);
+		theta = atan2(rhol_b, rhol_a);
 		for (unsigned int i=0; i<no_deg; i++){
 			unsigned int tmp = i+1;
 			if (tmp==no_deg) tmp = 0;
