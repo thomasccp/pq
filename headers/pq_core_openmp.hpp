@@ -7,30 +7,12 @@
 #define PQ_CORE_H
 
 #include <cmath>
+#include <iostream>
 #include "pq_type.hpp"
 
 class pq_core
 {
 	private:
-		double3 		d1, d2;
-		double3 		n;
-		double3 		rhol1, rhol2;
-		double			rhol_1, rhol_2;
-		double			theta;
-		double			u;
-		double3 		v32, w;
-		unsigned int	idx_1, idx_2;
-		double3 		wa, wb;
-		double			pa, pb, pc, pd;
-		double 			t1, t2, t;
-		double3			v2, v3;
-		double3 vd;
-		double3 vb1, vb2, vb3, vb4;
-		double 	lamda1, lamda2, lamda3, lamda4;
-		double			delta[MAX_NUM_SEGMENTS];
-		double			px[MAX_NUM_SEGMENTS];
-		double			py[MAX_NUM_SEGMENTS];
-		double			pz[MAX_NUM_SEGMENTS];
 
 	public:
 		void pt_dist(

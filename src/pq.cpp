@@ -1,14 +1,15 @@
 #include <cstdio>
 #include <iostream>
 #include <string>
+#include <sys/time.h>
 //#include <yalaa.hpp>
 #include "pq_io.hpp"
 #include "pq_type.hpp"
 #include "pq_wrapper.hpp"
-#ifdef	parallel
-#include "pq_core_openmp.hpp"
-#else
+#ifndef	OPENMP
 #include "pq_core.hpp"
+#else
+#include "pq_core_openmp.hpp"
 #endif
 
 using namespace std;
@@ -43,6 +44,9 @@ int main(const int argc, const char *argv[])
 	double			pt_contour_dev[MAX_NUM_SEGMENTS+1];
 	unsigned int	pt_contour_idx[MAX_NUM_SEGMENTS+1];
 
+	struct timeval tv1, tv2;
+	unsigned long long processing_time;
+
 	pq_io		data;
 	pq_wrapper	wrap;
 	pq_core		core;
@@ -62,17 +66,22 @@ int main(const int argc, const char *argv[])
 		return -1;
 
 	// Pre-processing
+	gettimeofday(&tv1, NULL);
 	std::cout << "Pre-processing..." << std::endl;
 	wrap.pre_process(no_C, no_deg, max_m, phi, C, M, W);
 
 	// Call PQ core
 	std::cout << "Core computation..." << std::endl;
+#pragma omp parallel for num_threads(NT)
 	for (unsigned int i=0; i<no_pt; i++)
 		core.pt_dist(no_C, no_deg, seg_idx, i, pt[i], max_m, phi, C, M, W, min_dist, out_pt, out_pt_idx);
 
 	// Post-processing
 	std::cout << "Post-processing..." << std::endl;
 	wrap.post_process(mode, no_link, no_pt, L, out_pt_idx, min_dist, dev, link_pt_idx, pt_contour_dev, pt_contour_idx);
+	gettimeofday(&tv2, NULL);
+	processing_time = (tv2.tv_sec - tv1.tv_sec)*1000000 + (tv2.tv_usec - tv1.tv_usec);
+	printf("Info: Processing time is %lu us.\n", (long unsigned int)processing_time);
 
 	// Write results to files
 	data.data_out(mode, no_link, no_pt, seg_idx, min_dist, out_pt, out_pt_idx, link_pt_idx, dev, pt_contour_dev, pt_contour_idx);

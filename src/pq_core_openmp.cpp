@@ -1,6 +1,5 @@
-/**** pq_core_openmp.cpp ****
+/**** pq_core.cpp ****
  * Core of proximity calculation
- * Optimised for OpenMP
  */
 
 #include <cmath>
@@ -27,7 +26,27 @@ void pq_core::pt_dist(
 		unsigned int s_out_pt_idx[]
 		){
 
+	double			delta[MAX_NUM_SEGMENTS];
+	double			px[MAX_NUM_SEGMENTS];
+	double			py[MAX_NUM_SEGMENTS];
+	double			pz[MAX_NUM_SEGMENTS];
+
 	for (unsigned int j=seg_idx[0]; j<=seg_idx[1]; j++){
+		double3 		d1, d2;
+		double3 		n;
+		double3 		rhol1, rhol2;
+		double			rhol_1, rhol_2;
+		double			theta;
+		double			u;
+		double3 		v32, w;
+		unsigned int	idx_1, idx_2;
+		double3 		wa, wb;
+		double			pa, pb, pc, pd;
+		double 			t1, t2, t;
+		double3			v2, v3;
+		double3 vd;
+		double3 vb1, vb2, vb3, vb4;
+		double 	lamda1, lamda2, lamda3, lamda4;
 
 		// Step 1: n = (C[j]-p[i]) * (c[j+1]-p[i])
 		d1.x = s_C[j].x - pt.x;
@@ -225,4 +244,5 @@ void pq_core::pt_dist(
 	//std::cout << s_out_pt[pt_idx].x << std::endl;
 
 }
+
 

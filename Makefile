@@ -1,8 +1,9 @@
 # Tool settings
-CC=g++
+CC=icc
 DB=gdb
 OPENMP=yes
-DEBUG=yes
+THREADS=32
+DEBUG=no
 AA=no
 
 # Test files
@@ -13,10 +14,10 @@ FCONTOUR=./dat/Polar_Cone.txt
 TARGET=pq
 
 ifeq ($(OPENMP),yes)
-MODE=parallel
+MODE=OPENMP
 CORE=pq_core_openmp
 else
-MODE=sequential
+MODE=SEQ
 CORE=pq_core
 endif
 
@@ -24,6 +25,14 @@ ifeq ($(DEBUG),yes)
 DBFLAG=-g
 else
 DBFLAB=
+endif
+
+ifeq ($(CC),icc)
+OMPFLAG=-openmp
+OPTFLAG=-fast
+else
+OMPFLAG=-fopenmp
+OPTFLAG=
 endif
 
 ifeq ($(AA),yes)
@@ -34,8 +43,8 @@ LIBYALAA=
 OBJ=$(TARGET)
 endif
 
-CCFLAGS=-O3 -Wall -I/usr/local/cxsc/include -I./headers -D=$(MODE) $(DBFLAG)
-CLFLAGS=-lm
+CCFLAGS=$(OMPFLAG) $(OPTFLAG) -O3 -Wall -I/usr/local/cxsc/include -I./headers -D$(MODE) -DNT=$(THREADS) $(DBFLAG)
+CLFLAGS=-lm $(OMPFLAG)
 
 all: $(OBJ)
 
