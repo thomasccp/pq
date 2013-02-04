@@ -6,10 +6,10 @@
 #include "pq_io.hpp"
 #include "pq_type.hpp"
 #include "pq_wrapper.hpp"
-#ifndef	OPENMP
-#include "pq_core.hpp"
-#else
+#ifdef	OPENMP
 #include "pq_core_openmp.hpp"
+#else
+#include "pq_core.hpp"
 #endif
 
 using namespace std;
@@ -72,7 +72,9 @@ int main(const int argc, const char *argv[])
 
 	// Call PQ core
 	std::cout << "Core computation..." << std::endl;
+#ifdef	OPENMP
 #pragma omp parallel for num_threads(NT)
+#endif
 	for (unsigned int i=0; i<no_pt; i++)
 		core.pt_dist(no_C, no_deg, seg_idx, i, pt[i], max_m, phi, C, M, W, min_dist, out_pt, out_pt_idx);
 

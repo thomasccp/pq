@@ -1,7 +1,7 @@
 # Tool settings
 CC=icc
 DB=gdb
-OPENMP=yes
+OPENMP=no
 THREADS=32
 DEBUG=no
 AA=no

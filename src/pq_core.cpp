@@ -26,12 +26,17 @@ void pq_core::pt_dist(
 		unsigned int s_out_pt_idx[]
 		){
 
+	d2.x = s_C[seg_idx[0]].x - pt.x;
+	d2.y = s_C[seg_idx[0]].y - pt.y;
+	d2.z = s_C[seg_idx[0]].z - pt.z;
+	vb4.x = s_C[seg_idx[0]].x - pt.x;
+	vb4.y = s_C[seg_idx[0]].y - pt.y;
+	vb4.z = s_C[seg_idx[0]].z - pt.z;
+
 	for (unsigned int j=seg_idx[0]; j<=seg_idx[1]; j++){
 
 		// Step 1: n = (C[j]-p[i]) * (c[j+1]-p[i])
-		d1.x = s_C[j].x - pt.x;
-		d1.y = s_C[j].y - pt.y;
-		d1.z = s_C[j].z - pt.z;
+		d1 = d2;
 		d2.x = s_C[j+1].x - pt.x;
 		d2.y = s_C[j+1].y - pt.y;
 		d2.z = s_C[j+1].z - pt.z;
@@ -139,18 +144,16 @@ void pq_core::pt_dist(
 		vd.z = v3.z - s_C[j].z;
 
 		// vb1=v1-p[i]; vb2=v2-p[i]; vb3=v3-p[i]; vb4=v4-p[i]
-		vb1.x = s_C[j].x - pt.x;
-		vb1.y = s_C[j].y - pt.y;
-		vb1.z = s_C[j].z - pt.z;
+		vb1 = vb4;
+		vb4.x = s_C[j+1].x - pt.x;
+		vb4.y = s_C[j+1].y - pt.y;
+		vb4.z = s_C[j+1].z - pt.z;
 		vb2.x = v2.x - pt.x;
 		vb2.y = v2.y - pt.y;
 		vb2.z = v2.z - pt.z;
 		vb3.x = v3.x - pt.x;
 		vb3.y = v3.y - pt.y;
 		vb3.z = v3.z - pt.z;
-		vb4.x = s_C[j+1].x - pt.x;
-		vb4.y = s_C[j+1].y - pt.y;
-		vb4.z = s_C[j+1].z - pt.z;
 		// lamda
 		if ((vd.z < vd.x) && (vd.z < vd.y)) {
 			lamda1 = vb2.x*vb1.y - vb1.x*vb2.y;
