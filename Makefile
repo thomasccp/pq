@@ -12,6 +12,7 @@ FCONTOUR=./dat/Polar_Cone.txt
 
 # Main program
 TARGET=pq
+OBJ=$(TARGET)
 
 ifeq ($(OPENMP),yes)
 MODE=OPENMP
@@ -37,10 +38,8 @@ endif
 
 ifeq ($(AA),yes)
 LIBYALAA=/usr/local/lib/libyalaa.so /usr/local/cxsc/lib/libcxsc.so
-OBJ=$(TARGET)_aa
 else
 LIBYALAA=
-OBJ=$(TARGET)
 endif
 
 CCFLAGS=$(OMPFLAG) $(OPTFLAG) -O3 -Wall -I/usr/local/cxsc/include -I./headers -D$(MODE) -DNT=$(THREADS) $(DBFLAG)
