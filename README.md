@@ -20,9 +20,13 @@ Thomas Jan 2013
 	- Port to C++
 	- CPU only
 	- Polar form only
-	- Range analysis by affine arithmetic using yalaa library
 	- Need modified data file
 	- MAX_NUM_POINTS 1409232
+
+Thomas Feb 2013
+	- Master: v0.2 that is able to run smoothly on CPU
+	- Branch cpu_run: for running real cases
+	- Branch yalaa: for range analysis using yalaa library
 
 ================================================================
 Compile:
