@@ -1,9 +1,9 @@
-# Proximity Queries for medical robotic application 
+## Proximity Queries for medical robotic application 
 Proximity Query (PQ) is a process to calculate the relative placement of objects. 
 It is a critical task for many applications such as robot motion planning, particularly those involving human-robot collaborative control. 
 This program computes a PQ formulation which can support non-convex objects represented by meshes or cloud points. 
 
-## How to use
+### How to use
 
 Compile:
 `make`
@@ -14,7 +14,7 @@ Debug:
 Run test case:
 `make run`
 
-## Change log
+### Change log
 
 Thomas Feb 2013
 	- Master: v0.2 that is able to run smoothly on CPU
@@ -47,4 +47,3 @@ April 2012
 	pq.c
 	- Original contour form version with cpu and gpu definitions
 
-================================================================
