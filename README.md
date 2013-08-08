@@ -21,7 +21,8 @@ Thomas Feb 2013
 	- Branch cpu_run: for running real cases
 	- Branch yalaa: for range analysis using yalaa library
 
-Thomas Jan 2013
+Jan 2013
+
 	pq.cpp
 	- Port to C++
 	- CPU only
@@ -29,17 +30,20 @@ Thomas Jan 2013
 	- Need modified data file
 	- MAX_NUM_POINTS 1409232
 
-Thomas Oct 2012 
+Oct 2012 
+
 	pq_all.c
 	- Added three modes
 	- Added pq_server and client
 	- Original data files need to be modified
 
-Thomas June 2012
+June 2012
+
 	pq_polar.c
 	- Added polar form
+	
+April 2012
 
-Brittle April 2012
 	pq.c
 	- Original contour form version with cpu and gpu definitions
 
