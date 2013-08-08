@@ -30,28 +30,33 @@ void pq_core::pt_dist(
 	double			px[MAX_NUM_SEGMENTS];
 	double			py[MAX_NUM_SEGMENTS];
 	double			pz[MAX_NUM_SEGMENTS];
+	double3 		d1, d2;
+	double3 		n;
+	double3 		rhol1, rhol2;
+	double			rhol_a, rhol_b;
+	double			theta;
+	double			u;
+	double3 		v32, w;
+	unsigned int	idx_1, idx_2;
+	double3 		wa, wb;
+	double			pa, pb, pc, pd;
+	double 			t1, t2, t;
+	double3			v2, v3;
+	double3 vd;
+	double3 vb1, vb2, vb3, vb4;
+	double 	lamda1, lamda2, lamda3, lamda4;
+
+	d2.x = s_C[seg_idx[0]].x - pt.x;
+	d2.y = s_C[seg_idx[0]].y - pt.y;
+	d2.z = s_C[seg_idx[0]].z - pt.z;
+	vb4.x = s_C[seg_idx[0]].x - pt.x;
+	vb4.y = s_C[seg_idx[0]].y - pt.y;
+	vb4.z = s_C[seg_idx[0]].z - pt.z;
 
 	for (unsigned int j=seg_idx[0]; j<=seg_idx[1]; j++){
-		double3 		d1, d2;
-		double3 		n;
-		double3 		rhol1, rhol2;
-		double			rhol_a, rhol_b;
-		double			theta;
-		double			u;
-		double3 		v32, w;
-		unsigned int	idx_1, idx_2;
-		double3 		wa, wb;
-		double			pa, pb, pc, pd;
-		double 			t1, t2, t;
-		double3			v2, v3;
-		double3 vd;
-		double3 vb1, vb2, vb3, vb4;
-		double 	lamda1, lamda2, lamda3, lamda4;
 
 		// Step 1: n = (C[j]-p[i]) * (c[j+1]-p[i])
-		d1.x = s_C[j].x - pt.x;
-		d1.y = s_C[j].y - pt.y;
-		d1.z = s_C[j].z - pt.z;
+		d1 = d2;
 		d2.x = s_C[j+1].x - pt.x;
 		d2.y = s_C[j+1].y - pt.y;
 		d2.z = s_C[j+1].z - pt.z;
@@ -159,9 +164,7 @@ void pq_core::pt_dist(
 		vd.z = v3.z - s_C[j].z;
 
 		// vb1=v1-p[i]; vb2=v2-p[i]; vb3=v3-p[i]; vb4=v4-p[i]
-		vb1.x = s_C[j].x - pt.x;
-		vb1.y = s_C[j].y - pt.y;
-		vb1.z = s_C[j].z - pt.z;
+		vb1 = vb4;
 		vb2.x = v2.x - pt.x;
 		vb2.y = v2.y - pt.y;
 		vb2.z = v2.z - pt.z;

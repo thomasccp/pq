@@ -11,19 +11,19 @@
  * For each point, find the penetration, i.e. distance between the point and the closest link
  */
 void pq_core::pt_dist(
-		const unsigned int &no_C,
-		const unsigned int &no_deg,
-		const unsigned int seg_idx[],
-		const unsigned int &pt_idx, 
-		const double3 &pt, 
-		const unsigned int max_m[],
-		const double phi[][MAX_NUM_DEGREES],
-		double3 s_C[], 
-		double3 s_M[], 
-		double3 s_W[][MAX_NUM_DEGREES],
-		double s_min_dist[],
-		double3 s_out_pt[],
-		unsigned int s_out_pt_idx[]
+		const unsigned int &no_C, // FPGA: scalar
+		const unsigned int &no_deg, // FPGA: scalar
+		const unsigned int seg_idx[], // FPGA: scalar
+		const unsigned int &pt_idx, // FPGA: necessary?
+		const double3 &pt, // FPGA: DRAM in
+		const unsigned int max_m[], // FPGA: scalar/ROM
+		const double phi[][MAX_NUM_DEGREES], // FPGA: ROM
+		double3 s_C[], // FPGA: ROM
+		double3 s_M[], // FPGA: ROM
+		double3 s_W[][MAX_NUM_DEGREES], // FPGA: ROM
+		double s_min_dist[], // FPGA: DRAM out
+		double3 s_out_pt[], // FPGA: DRAM out
+		unsigned int s_out_pt_idx[] // FPGA: DRAM out
 		){
 
 	d2.x = s_C[seg_idx[0]].x - pt.x;
@@ -145,15 +145,15 @@ void pq_core::pt_dist(
 
 		// vb1=v1-p[i]; vb2=v2-p[i]; vb3=v3-p[i]; vb4=v4-p[i]
 		vb1 = vb4;
-		vb4.x = s_C[j+1].x - pt.x;
-		vb4.y = s_C[j+1].y - pt.y;
-		vb4.z = s_C[j+1].z - pt.z;
 		vb2.x = v2.x - pt.x;
 		vb2.y = v2.y - pt.y;
 		vb2.z = v2.z - pt.z;
 		vb3.x = v3.x - pt.x;
 		vb3.y = v3.y - pt.y;
 		vb3.z = v3.z - pt.z;
+		vb4.x = s_C[j+1].x - pt.x;
+		vb4.y = s_C[j+1].y - pt.y;
+		vb4.z = s_C[j+1].z - pt.z;
 		// lamda
 		if ((vd.z < vd.x) && (vd.z < vd.y)) {
 			lamda1 = vb2.x*vb1.y - vb1.x*vb2.y;

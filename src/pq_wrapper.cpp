@@ -9,6 +9,7 @@
 #include "pq_wrapper.hpp"
 
 // Pre-processing: w_1[j][i], w_2[j][i], max_m[j], phi[j][i], C_1[j], C_2[j]
+// Update rate is low (pre-compute at host? run-time reconfiguration?)
 void pq_wrapper::pre_process(
 		const unsigned int &no_C,
 		const unsigned int &no_deg,

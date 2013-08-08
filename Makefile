@@ -2,7 +2,7 @@
 CC=icc
 DB=gdb
 OPENMP=yes
-THREADS=32
+THREADS=12
 DEBUG=no
 AA=no
 
@@ -44,6 +44,8 @@ endif
 
 CCFLAGS=$(OMPFLAG) $(OPTFLAG) -O3 -Wall -I/usr/local/cxsc/include -I./headers -D$(MODE) -DNT=$(THREADS) $(DBFLAG)
 CLFLAGS=-lm $(OMPFLAG)
+
+.PHONY: debug run clean
 
 all: $(OBJ)
 

@@ -67,18 +67,22 @@ int main(const int argc, const char *argv[])
 
 	// Pre-processing
 	gettimeofday(&tv1, NULL);
+	// Host: Pre-process contour data
 	std::cout << "Pre-processing..." << std::endl;
 	wrap.pre_process(no_C, no_deg, max_m, phi, C, M, W);
+	// FPGA: Update content in ROMs - C, M, W
 
 	// Call PQ core
 	std::cout << "Core computation..." << std::endl;
 #ifdef	OPENMP
 #pragma omp parallel for num_threads(NT)
 #endif
+	// FPGA: Unroll loop here (Multiple kernels)
 	for (unsigned int i=0; i<no_pt; i++)
 		core.pt_dist(no_C, no_deg, seg_idx, i, pt[i], max_m, phi, C, M, W, min_dist, out_pt, out_pt_idx);
 
 	// Post-processing
+	// Host: Post-process output data
 	std::cout << "Post-processing..." << std::endl;
 	wrap.post_process(mode, no_link, no_pt, L, out_pt_idx, min_dist, dev, link_pt_idx, pt_contour_dev, pt_contour_idx);
 	gettimeofday(&tv2, NULL);
