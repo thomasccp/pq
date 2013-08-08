@@ -6,13 +6,13 @@ This program computes a PQ formulation which can support non-convex objects repr
 ## How to use
 
 Compile:
-'make'
+`make`
 
 Debug:
-'make debug'
+`make debug`
 
 Run test case:
-'make run'
+`make run`
 
 ## Change log
 
