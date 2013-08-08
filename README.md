@@ -16,10 +16,9 @@ Run test case:
 
 ### Change log
 
-Thomas Feb 2013
-	- Master: v0.2 that is able to run smoothly on CPU
-	- Branch cpu_run: for running real cases
-	- Branch yalaa: for range analysis using yalaa library
+Feb 2013
+
+	- Support Openmp for parallel acceleration 
 
 Jan 2013
 
